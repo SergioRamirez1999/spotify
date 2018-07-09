@@ -1,3 +1,61 @@
-<h1>
-  {{title}}
-</h1>
+<!--ngIf condicional... muestra si identity != null -->
+<div *ngIf="identity" class="navigation col-lg-1">
+  <h1>
+    {{title}}
+  </h1>
+</div>
+
+<div class="clearfix"></div>
+
+<div *ngIf="identity" class="central col-lg-11">
+  <p>Estas logueado en la aplicacion</p>
+</div>
+
+
+<div *ngIf="!identity" class="col-lg-12">
+  <div class="col-lg-6">
+    <h1>Identificate</h1>
+    <form class="col-md-7" >
+      <p>
+        <label>Email:</label>
+        <input type="email" class="form-control" required>
+        <span *ngIf="!email.valid && email.touched" style="color: red">email is required</span>
+      </p>
+      <p>
+        <label>Password:</label>
+        <input type="password" class="form-control" required>
+        <span *ngIf="!password.valid && password.touched" style="color: red">password is required</span>
+      </p>
+
+      <input type="submit" value="Entrar" class="btn btn-primary">
+    </form>
+  </div>
+
+  <div class="col-lg-6">
+    <h1>Registrate</h1>
+    <form class="col-md-7">
+      <p>
+        <label>Name:</label>
+        <input type="text" class="form-control" required>
+      </p>
+
+      <p>
+        <label>Lastname:</label>
+        <input type="text" class="form-control" required>
+      </p>
+
+      <p>
+        <label>Email</label>
+        <input type="email" class="form-control" required>
+      </p>
+
+      <p>
+        <label>Password:</label>
+        <input type="password" class="form-control" required>
+      </p>
+
+      <input type="submit" value="Registrarse" class="btn btn-primary">
+    </form>
+  </div>
+</div>
+
