@@ -10,7 +10,7 @@ var api = express.Router();
 
 //Si pegan a esta url, ejecutar el method del script usercontroller
 //second param is our middleware
-api.post('/managed-users', userController.register);
+api.post('/managed-users/register', userController.register);
 //param 'id' is mandatory. param '?' is optional
 api.put('/managed-users/:id', md_auth.ensureAuth, userController.updateUser);
 api.post('/managed-users/login', userController.login);

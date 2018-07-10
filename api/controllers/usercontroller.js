@@ -9,8 +9,6 @@ var jwt = require('../services/jwt');
 
 
 function register(req,res){
-    if(!req.headers.authorization)
-       return res.status(403).send({messange: 'authorization header not found'});
     let user = new User();
     let params = req.body;
 
@@ -47,7 +45,6 @@ function register(req,res){
 
 function login(req,res){
     let params = req.body;
-
     let email = params.email;
     let password = params.password;
 
@@ -57,7 +54,7 @@ function login(req,res){
             res.status(500).send({message: 'login error'});
         }else{
             if(!user){
-                res.status(200).send({message: 'user does not exist'});
+                res.status(404).send({message: 'user does not exist'});
             }else{
                 //If the email exists
                 //Password decoder
@@ -75,7 +72,7 @@ function login(req,res){
                         }
 
                     }else{
-                        res.status(500).send({message: 'error to login'})
+                        res.status(404).send({message: 'password or email is invalid'})
                     }
                 });
             }
