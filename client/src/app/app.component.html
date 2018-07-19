@@ -1,22 +1,51 @@
 <!--ngIf condicional... muestra si identity != null -->
 <div *ngIf="identity" class="navigation col-lg-1">
-  <h1>
-    {{title}}
+  <h1 class="head_title">
+    <a [routerLink]="['/']">
+      <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+      {{title}}
+    </a>
   </h1>
-  {{identity.name}} {{identity.lastname}}
-  <span class="btn btn-warning" (click)="onLogout()">logout</span>
-</div>
+  <nav id="navigation">
+    <a href="#">
+      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      Search
+    </a>
+    <a href="#">
+      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      Artists
+    </a>
+    <a href="#">
+      <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+      Albums
+    </a>
 
-<div class="clearfix"></div>
+  </nav>
+
+  <nav id="user_logged">
+    <div class="user-image">
+      <img id="image_logged" src="{{url+identity.image}}" alt="profile image">
+    </div>
+    <span id="identity_name">{{identity.name}}</span>
+    <a [routerLink]="['/edit-profile']">
+      <div class="glyphicon glyphicon-cog" aria-hidden="true"></div>
+      Profile
+    </a>
+    <a (click)="onLogout()" class="btn_logout">
+      <div class="glyphicon glyphicon-log-out" aria-hidden="true"></div>
+      Sign Out
+    </a>
+  </nav>
+</div>
 
 <div *ngIf="identity" class="central col-lg-11">
-  <p>Estas logueado en la aplicacion</p>
+  <router-outlet></router-outlet>
 </div>
 
 
-<div *ngIf="!identity" class="col-lg-12">
+<div *ngIf="!identity" class="col-lg-11">
   <div class="col-lg-6">
-    <h1>Identificate</h1>
+    <h1>Sign in</h1>
     <div *ngIf='errorMessage'>
       <div class="alert alert-danger">
         <strong>Your account or password is incorrect. If you don't remember your password,
@@ -41,7 +70,7 @@
   </div>
 
   <div class="col-lg-6">
-    <h1>Registrate</h1>
+    <h1>Sign up</h1>
     <div *ngIf='alertRegister'>
       <div class="alert alert-info">
         <strong>{{alertRegister}}</strong>
@@ -61,7 +90,7 @@
       </p>
 
       <p>
-        <label>Email</label>
+        <label>Email:</label>
         <input type="email" class="form-control" #email="ngModel" name="email" [(ngModel)]="user_register.email" required>
         <span *ngIf="!email.valid && email.touched" style="color: red">email is mandatory</span>
       </p>
@@ -72,7 +101,7 @@
         <span *ngIf="!password.valid && password.touched" style="color: red">password is mandatory</span>
       </p>
 
-      <input type="submit" value="Registrarse" class="btn btn-primary">
+      <input type="submit" value="Sign up for Musify" class="btn btn-primary">
     </form>
   </div>
 </div>

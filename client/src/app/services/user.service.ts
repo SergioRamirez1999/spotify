@@ -41,10 +41,25 @@ export class UserService {
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
 
-        //send request by post method 
         return this._http.post(this.urlUser + 'register', params, { headers: headers })
             .pipe(map(res => res));
 
+    }
+
+    public userUpdate(user_to_update) {
+        let json = JSON.stringify(user_to_update);
+        let params = json;
+
+        let headers = new Headers(
+            {
+                'Content-Type': 'application/json',
+                'Authorization':this.getToken()
+            }
+        );
+
+
+        return this._http.put(this.urlUser + user_to_update._id, params, { headers: headers })
+            .pipe(map(res => res));
     }
 
     public getIdentity() {

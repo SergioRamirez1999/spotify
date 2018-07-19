@@ -1,0 +1,38 @@
+<div class="col-lg-6">
+    <h1>{{title}}</h1>
+    <div *ngIf='alertUpdate'>
+        <div class="alert alert-info">
+            <strong>{{alertUpdate}}</strong>
+        </div>
+    </div>
+    <form #updateForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">
+        <p>
+            <label>Name:</label>
+            <input type="text" class="form-control" #name="ngModel" name="name" [(ngModel)]="user.name" required>
+            <span *ngIf="!name.valid && name.touched" style="color: red">name is mandatory</span>
+        </p>
+
+        <p>
+            <label>Lastname:</label>
+            <input type="text" class="form-control" #lastname="ngModel" name="lastname" [(ngModel)]="user.lastname" required>
+            <span *ngIf="!lastname.valid && lastname.touched" style="color: red">lastname is mandatory</span>
+        </p>
+
+        <p>
+            <label>Email:</label>
+            <input type="email" class="form-control" #email="ngModel" name="email" [(ngModel)]="user.email" required>
+            <span *ngIf="!email.valid && email.touched" style="color: red">email is mandatory</span>
+        </p>
+
+        <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
+            <img id="update_image"src="{{url+user.image}}" alt="" style="width: 100px">
+        </div>
+        <p>
+            <input type="file" placeholder="Upload new picture" (change)="fileChangeEvent($event)"class="btn btn-primary">
+        </p>
+
+        <input type="submit" value="Update" class="btn btn-primary">
+    </form>
+
+
+</div>

@@ -81,16 +81,40 @@ function login(req,res){
     
 }
 
+function getUsers(req,res){
+    let page = req.query.page;
+    let itemsPerPage = 5;
+
+    User.find().sort('name').paginate(page, itemsPerPage, (err, users, total) => {
+        if(err){
+            res.status(500).send({message: 'error when returning users'});
+        }else{
+            if(!users)
+                res.status(404).send({message: 'users not found'});
+            else
+                return res.status(200).send({
+                    page: page,
+                    total_items: total,
+                    users: users
+                });
+        }
+    });
+}
+
 function updateUser(req,res){
     let user_id = req.params.id;
     let update = req.body;
+
+    //check if the user id to update(param) is equal to user id(body) 
+    if(user_id != req.user.sub)
+        return res.status(500).send({message: 'you don\'t have enough permissions to update this user'})
 
     User.findByIdAndUpdate(user_id, update, (err, userUpdated) => {
         if(err){
             res.status(500).send({message: 'error when updating user'});
         }else{
             if(!userUpdated){
-                res.status(404).send({message: 'error when updating user'})
+                res.status(404).send({message: 'user not found'})
             }else{
                 res.status(200).send({user_updated: userUpdated});
             }
@@ -150,5 +174,6 @@ module.exports = {
     login,
     updateUser,
     uploadImage,
-    getImageFile
+    getImageFile,
+    getUsers
 };

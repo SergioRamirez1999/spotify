@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
+import{ GLOBAL } from './services/global';
 import { User } from './models/user';
 import { UserService } from './services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -17,18 +20,20 @@ export class AppComponent implements OnInit {
     public token;
     public errorMessage;
     public alertRegister;
+    public url: string;
 
-    constructor(private _userService: UserService) {
+    constructor(private _userService: UserService, private _router: Router) {
         this.user = new User('', '', '', '', '', 'ROLE_USER', '');
         this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
+        this.identity = this._userService.getIdentity();
+        this.token = this._userService.getToken();
+        this.url = GLOBAL.url + GLOBAL.urlUser + 'image/';
 
     }
 
     public ngOnInit() {
-        this.identity = this._userService.getIdentity();
-        this.token = this._userService.getToken();
-        console.log(this.identity);
-        console.log(this.token);
+        
+        
     }
 
 
@@ -36,9 +41,8 @@ export class AppComponent implements OnInit {
 
         this._userService.signin(this.user).subscribe(
             response => {
-
                 this.identity = JSON.parse(((<any>response)._body)).user;
-
+                
                 if (this.identity._id) {
                     this._userService.signin(this.user, 'true').subscribe(
                         response => {
@@ -63,6 +67,7 @@ export class AppComponent implements OnInit {
     }
 
     public onSubmitRegister() {
+        //create a module that sends an email for activation
         this._userService.signup(this.user_register).subscribe(
             response => {
                 this.user_register = JSON.parse((<any>response)._body).user_stored;
@@ -85,6 +90,6 @@ export class AppComponent implements OnInit {
         localStorage.removeItem('token');
         this.identity = null;
         this.token = null;
-
+        this._router.navigate(['/']);
     }
 }
