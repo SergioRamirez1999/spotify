@@ -17,6 +17,6 @@ api.put('/managed-artists/:id', md_auth.ensureAuth, artistController.updateArtis
 api.delete('/managed-artists/:id', md_auth.ensureAuth, artistController.deleteArtist);
 
 api.put('/managed-artists/image/:id', [md_auth.ensureAuth, md_upload], artistController.uploadImage);
-api.get('/managed-artists/image/:imageFile', md_auth.ensureAuth, artistController.getImageFile);
+api.get('/managed-artists/image/:imageFile', artistController.getImageFile);
 
 module.exports = api;

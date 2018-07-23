@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import{ GLOBAL } from './services/global';
 import { User } from './models/user';
 import { UserService } from './services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -22,7 +21,11 @@ export class AppComponent implements OnInit {
     public alertRegister;
     public url: string;
 
-    constructor(private _userService: UserService, private _router: Router) {
+    constructor(
+        private _userService: UserService, 
+        private _route: ActivatedRoute,
+        private _router: Router
+    ) {
         this.user = new User('', '', '', '', '', 'ROLE_USER', '');
         this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
         this.identity = this._userService.getIdentity();

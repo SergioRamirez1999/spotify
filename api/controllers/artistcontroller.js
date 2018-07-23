@@ -133,7 +133,7 @@ function uploadImage(req, res){
         let ext_split = file_name.split('\.');
         let file_ext = ext_split[1];
         
-        if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif') {
+        if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg') {
             Artist.findByIdAndUpdate(artist_id, {image: file_name}, (err, artistUpdated) => {
 
                 if(err)

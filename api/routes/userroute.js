@@ -14,7 +14,7 @@ api.post('/managed-users/register', userController.register);
 //param 'id' is mandatory. param '?' is optional
 api.put('/managed-users/:id', md_auth.ensureAuth, userController.updateUser);
 api.post('/managed-users/login', userController.login);
-api.post('/managed-users/image/:id', [md_auth.ensureAuth, md_upload], userController.uploadImage);
+api.put('/managed-users/image/:id', [md_auth.ensureAuth, md_upload], userController.uploadImage);
 
 api.get('/managed-users/image/:imageFile', userController.getImageFile);
 api.get('/managed-users?:page', md_auth.ensureAuth, userController.getUsers);

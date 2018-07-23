@@ -1,0 +1,52 @@
+<div class="col-lg-4" *ngIf='identity.role == "ROLE_ADMIN"'>
+    <h1>{{title}}</h1>
+    <div *ngIf='alertMessage'>
+        <div class="alert alert-danger">
+            <span>{{alertMessage}}</span>
+        </div>
+    </div>
+    <div *ngIf='infoMessage == "The Artist has been added"'>
+        <div class="alert alert-info">
+            <span>{{infoMessage}}</span>
+        </div>
+    </div>
+    <form #formArtist="ngForm" (ngSubmit)="onSubmit()">
+        <div *ngIf='infoMessage == "Success!!"'>
+            <div class="alert alert-info">
+                <span>{{infoMessage}}</span>
+            </div>
+        </div>
+        <p>
+            <label>Name: </label>
+            <input type="text" #name="ngModel" name="name" [(ngModel)]="artist.name" class="form-control">
+            <span *ngIf="!name.valid && name.touched" style="color: red">
+                name is mandatory
+            </span>
+        </p>
+        <p>
+            <label>Description: </label>
+            <textarea #description="ngModel" name="description" [(ngModel)]="artist.description" class="form-control"></textarea>
+            <span *ngIf="!name.valid && name.touched" style="color: red">
+                description is mandatory
+            </span>
+        </p>
+
+        <div *ngIf="isEdit">
+            <div class="artist-image-for-edit" *ngIf="artist.image && artist.image != 'null'">
+                <img src="{{urlArtist + '/image/' + artist.image}}" alt="image profile">
+            </div>
+            <p>
+                <label>Image: </label>
+                <input type="file" placeholder="Upload image" (change)="fileChangeEvent($event)">
+            </p>
+        </div>
+
+        <input type="submit" value="{{title}}" [disabled]="!formArtist.form.valid" class="btn btn-success">
+
+    </form>
+</div>
+
+<div class="col-lg-4" *ngIf='!identity || identity.role != "ROLE_ADMIN"'>
+    <h1>Error</h1>
+    <p>FORBIDDEN</p>
+</div>

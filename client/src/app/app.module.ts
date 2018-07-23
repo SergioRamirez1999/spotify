@@ -6,6 +6,12 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 //Import components
 import { UserEditComponent } from './components/user-edit.component';
+import { HomeComponent } from './components/home.component';
+import { ArtistListComponent } from './components/artist-list.component';
+import { ArtistAddComponent } from './components/artist-add.component';
+import { ArtistEditComponent } from './components/artist-edit.component';
+import { ArtistDetailComponent } from './components/artist-detail.component';
+
 //routing
 import{ routingModule, appRoutingProviders } from './app.routing';
 
@@ -15,7 +21,12 @@ import{ routingModule, appRoutingProviders } from './app.routing';
   // We'll have access to components directives from others components
   declarations: [
     AppComponent,
-    UserEditComponent
+    HomeComponent,
+    UserEditComponent,
+    ArtistListComponent,
+    ArtistAddComponent,
+    ArtistEditComponent,
+    ArtistDetailComponent
   ],
   imports: [
     BrowserModule,

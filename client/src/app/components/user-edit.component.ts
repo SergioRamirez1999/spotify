@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { GLOBAL } from '../services/global';
 
+
 @Component({
     selector: 'user-edit',
     templateUrl: '../views/user-edit.html',
@@ -99,7 +100,7 @@ export class UserEditComponent implements OnInit {
             }
 
             //send request with Authorization header
-            xhr.open('POST', url, true);
+            xhr.open('PUT', url, true);
             xhr.setRequestHeader('Authorization', token);
             xhr.send(formData);
         });
