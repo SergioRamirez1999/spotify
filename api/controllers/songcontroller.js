@@ -16,6 +16,7 @@ function saveSong(req, res) {
     song.file = null;
     song.album = params.album;
 
+    console.log(song);
 
     if (song.number != null && song.name != null && song.duration != null && song.album != null) {
         song.save((err, songStored) => {

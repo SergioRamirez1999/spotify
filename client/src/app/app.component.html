@@ -15,7 +15,7 @@
       <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
       Artists
     </a>
-    <a href="#">
+    <a [routerLink]="['/artists/', 1]">
       <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
       Albums
     </a>
@@ -40,6 +40,7 @@
 
 <div [class.hidden]="!identity" class="central col-lg-11">
   <router-outlet></router-outlet>
+  <player></player>
 </div>
 
 
@@ -53,20 +54,19 @@
         </strong>
       </div>
     </div>
+
     <form #loginForm="ngForm" (ngSubmit)="onSubmitLogin()" class="col-md-7">
       <p>
         <label>Email:</label>
         <input type="email" class="form-control" #email="ngModel" name="email" [(ngModel)]="user.email" required>
-        <span *ngIf="!email.valid && email.touched" style="color: red">email is required</span>
       </p>
       <p>
         <label>Password:</label>
         <input type="password" class="form-control" #password="ngModel" name="password" [(ngModel)]="user.password" required>
-        <span *ngIf="!password.valid && password.touched" style="color: red">password is required</span>
       </p>
-
-      <input type="submit" value="Entrar" class="btn btn-primary">
+      <input type="submit" value="Entrar" [disabled]="!loginForm.form.valid" class="btn btn-primary">
     </form>
+
   </div>
 
   <div class="col-lg-6">
@@ -76,7 +76,8 @@
         <strong>{{alertRegister}}</strong>
       </div>
     </div>
-    <form #loginForm="ngForm" (ngSubmit)="onSubmitRegister()" class="col-md-7">
+
+    <form #signUpForm="ngForm" (ngSubmit)="onSubmitRegister()" class="col-md-7">
       <p>
         <label>Name:</label>
         <input type="text" class="form-control" #name="ngModel" name="name" [(ngModel)]="user_register.name" required>
@@ -101,7 +102,8 @@
         <span *ngIf="!password.valid && password.touched" style="color: red">password is mandatory</span>
       </p>
 
-      <input type="submit" value="Sign up for Musify" class="btn btn-primary">
+      <input type="submit" value="Sign up for Musify" [disabled]="!signUpForm.form.valid" class="btn btn-primary">
     </form>
+
   </div>
 </div>

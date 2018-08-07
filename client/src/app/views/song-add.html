@@ -1,0 +1,60 @@
+<div class="col-lg-4" *ngIf='identity.role == "ROLE_ADMIN"'>
+    <h1>{{titleTemplate}}</h1>
+
+    <div *ngIf='errorMessage'>
+        <div class="alert alert-danger">
+            <span>{{errorMessage}}</span>
+        </div>
+    </div>
+    <div *ngIf='infoMessage'>
+        <div class="alert alert-info">
+            <span>{{infoMessage}}</span>
+        </div>
+    </div>
+
+    <form #formSong="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+            <label>Number: </label>
+            <input type="text" #number="ngModel" name="number" [(ngModel)]="song.number" class="form-control" required>
+            <span *ngIf="!number.valid && number.touched">
+                number is mandatory
+            </span>
+        </p>
+        <p>
+            <label>Title: </label>
+            <input type="text" #name="ngModel" name="name" [(ngModel)]="song.name" class="form-control" required>
+            <span *ngIf="!name.valid && name.touched">
+                title is mandatory
+            </span>
+        </p>
+        <p>
+            <label>Duration: </label>
+            <input type="text" #duration="ngModel" name="duration" [(ngModel)]="song.duration" class="form-control" required>
+            <span *ngIf="!duration.valid && duration.touched">
+                duration is mandatory
+            </span>
+        </p>
+
+        <div *ngIf="isEdit">
+            <div class="song-file-for-edit" *ngIf="song.file && song.file != 'null'">
+                <audio controls>
+                    <source src="{{ urlSongFile + song.file}}" type="audio/mpeg">
+                       
+                </audio>
+            </div>
+            <p>
+                <label>Song: </label>
+                <input type="file" placeholder="Upload Song" (change)="fileChangeEvent($event)" class="btn btn-primary">
+            </p>
+        </div>
+
+        <input type="submit" value="{{titleTemplate}}" [disabled]="!formSong.form.valid" class="btn btn-success">
+
+    </form>
+
+</div>
+
+<div class="col-lg-4" *ngIf='!identity || identity.role != "ROLE_ADMIN"'>
+    <h1>Error</h1>
+    <p>FORBIDDEN</p>
+</div>

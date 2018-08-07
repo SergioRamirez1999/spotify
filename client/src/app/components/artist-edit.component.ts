@@ -19,9 +19,8 @@ export class ArtistEditComponent implements OnInit {
     public identity: string;
     public token: string;
     public url: string;
-    public urlArtist: string;
+    public urlArtistImage: string;
     public alertMessage: string;
-    public infoMessage: string;
     public isEdit: boolean;
     public filesToUpload: Array<File>;
 
@@ -38,7 +37,7 @@ export class ArtistEditComponent implements OnInit {
         this.url = GLOBAL.url;
         this.artist = new Artist('', '', '');
         this.isEdit = true;
-        this.urlArtist = GLOBAL.url + GLOBAL.urlArtist;
+        this.urlArtistImage = GLOBAL.url + GLOBAL.urlArtist + '/image/';
     }
 
     ngOnInit() {
@@ -76,21 +75,20 @@ export class ArtistEditComponent implements OnInit {
 
                     let artistTemp = JSON.parse((<any>response)._body).artist_updated;
                     if (artistTemp) {
-                        this.infoMessage = 'Successful update';
-                        this.infoMessage = 'Success!!';
                         //Upload artist image
-                        if(this.filesToUpload){
-                            this._uploadService.makeFileRequest(this.urlArtist+'/image/'+ artistTemp._id, [], this.filesToUpload, this.token, 'image' )
-                            .then(
-                                resolve => {
-                                    
-                                },
-                                error => {
-                                    console.log(error);
-                                }
-                            );
+                        if (this.filesToUpload) {
+                            this._uploadService.makeFileRequest(this.urlArtistImage + artistTemp._id, [], this.filesToUpload, this.token, 'image')
+                                .then(
+                                    resolve => {
+                                    },
+                                    error => {
+                                        console.log(error);
+                                    }
+                                );
                         }
-                        
+
+                        this._router.navigate(['artist/', artistTemp._id]);
+
                     } else {
                         this.alertMessage = 'SERVER ERROR';
                     }

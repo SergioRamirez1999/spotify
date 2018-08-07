@@ -5,6 +5,10 @@ html, body {
     letter-spacing: .10em;
 }
 
+.album-add-container {
+    min-height: 900px;
+}
+
 .actived {
     border-bottom: 4px solid #84BD00;
     padding-bottom: 4px;
@@ -16,6 +20,21 @@ html, body {
     margin-top: -30px;
     background: #222326;
     margin-left: 40px;
+}
+
+.secure_delete_album {
+    position: absolute;
+    margin-top: -30px;
+    background: #222326;
+    margin-left: 71px;
+}
+
+.secure_delete_song {
+    float: right;
+    right: 24px;
+    margin-top: -36px;
+    background: #eee;
+    padding: 5px 0px 5px 0px;
 }
 
 /*scroll albums*/
@@ -87,22 +106,32 @@ html, body {
     width: 57px;
 }
 
-/*-------ARTIST LIST STYLES---------*/
 
+/*-------ARTIST ALbum EDIT STYLES---------*/
 .artist-image-for-edit img {
     width: 428px;
     height: 300px;
 }
 
-.artist-list {
-    text-align: center;
-    margin: 0px;
-    padding: 0px;
-    margin-top: 30px;
-    list-style: none;
+.album-image-for-edit img {
+    width: 428px;
+    height: 300px;
 }
 
-.artist-item {
+/*-------ARTIST AND ALBUM LIST STYLES---------*/
+.artist_list,
+.album_list {
+    text-align: center;
+    margin: 0px;
+    margin-top: 20px;
+    padding: 0px;
+    min-height: 600px;
+    list-style: none;
+    margin-bottom: 280px;
+}
+
+.artist_item,
+.album_item {
     width: 18%;
     margin: 0px;
     padding: 0px;
@@ -112,50 +141,183 @@ html, body {
     margin-top: 20px;
 }
 
-.artist-item .artist-image {
+.artist_item .artist-image,
+.album_item .album-image {
     height: 245px;
     width: 100%;
     overflow: hidden;
     background: black;
 }
 
-.artist-item .artist-image img {
+.artist_item .artist-image img {
     height: 245px;
     max-width: 100%;
 }
 
-.artist-item .artist-image img:hover {
+.artist_item .artist-image img:hover,
+.album_item .album-image img:hover {
     opacity: 0.4;
     transition: all 0.1s ease-in-out;
 }
 
-.artist-name {
+
+.artist-name,
+.album-name {
     background: #222326;
     text-decoration: none;
     padding: 10px;
     text-align: center;
 }
 
-.artist-name a {
+.artist-name a,
+.album-name a {
     color:#ddd;
     text-decoration: none;
 }
 
-.artist-name a:hover {
+.artist-name a:hover,
+.album-name a:hover {
     color: white;
 }
 
-/*-------ARTIST DETAIL STYLES---------*/
+/*-------ALBUM LIST STYLES--------*/
 
-#artist-head-card .image{
-    width: 150px;
-    height: 150px;
+.album_item {
+    height: 327px;
+}
+.album_item .album-image img {
+    height: 245px;
+    width: 100%;
+}
+
+.album_item {
+    width: 23%;
+}
+
+.album_list {
+    text-align: center;
+    margin: 0px;
+    margin-top: 20px;
+    padding: 0px;
+    min-height: 600px;
+    list-style: none;
+    margin-bottom: 280px;
+}
+
+/*-------ARTIST AND ALBUM DETAIL STYLES---------*/
+
+#artist-head-card .image, 
+#album-head-card .image {
+    width: 180px;
+    height: 180px;
     overflow: hidden;
     float: left;
     margin-right: 30px;
 }
 
-.image img {
-    width: 150px;
-    height: 150px;
+#artist-head-card .image img,
+#album-head-card .image img {
+    width: 180px;
+    height: 180px;
 }
+
+
+/*-------SONG STYLES---------*/
+#gallery-songs {
+    margin-top: 10px;
+    margin-left: -30px;
+    min-height: 500px;
+}
+
+#songs_list {
+    margin-left: 25px;
+    padding: 10px;
+    margin-bottom: 150px;
+}
+
+.song_item {
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+    padding-top: 3px;
+}
+
+.song_item .title {
+    padding: 10px;
+}
+
+.song_item .buttons {
+    float: right;
+}
+
+.song_item .btn-succcess {
+    margin-right: 10px;
+}
+
+/*------PLAYER------*/
+.player {
+    background: #1C1C1F;
+    position: fixed;
+    width: 90.5%;
+    bottom: 0;
+    padding: 5px 0px 10px 5px;
+    margin-left: -15px;
+    border-left: 1px solid #444;
+}
+
+.player .album-image {
+    float: left;
+    width: 138px;
+    height: 119px;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.player .album-image img {
+    height: 100%;
+}
+
+.player .audio-file {
+    width: 85%;
+    height: 40px;
+    margin-left: 10px;
+    padding-top: 10px;
+    float: left;
+}
+
+.player .audio-file-description {
+    margin-left: 15px;
+    color: rgb(141, 141, 141);
+}
+
+.player .loop_icon {
+    float: right;
+    padding: 0px 20px 10px 0px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.player .loop_icon:hover {
+    color: rgba(255,255,255,0.8);
+}
+
+.player audio {
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+}
+
+.loop_checked {
+    color: rgba(255,255,255);
+}
+
+
+
+
+
+
+
+
+
+
+

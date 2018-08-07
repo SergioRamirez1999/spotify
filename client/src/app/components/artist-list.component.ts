@@ -87,6 +87,7 @@ export class ArtistListComponent implements OnInit {
         this.confirm_delete = null;
     }
 
+    //ACORDARSE DE ELMINAR EL ARCHIVO DE IMG DE ARTIST
     onDeleteArtist(id) {
         this._artistService.deleteArtist(this.token, id).subscribe(
             response => {
@@ -94,7 +95,7 @@ export class ArtistListComponent implements OnInit {
                 if (artistsTemp) {
                     this.getArtists();
                 } else {
-                    console.log(new Error('error re zarpado loco'))
+                    console.log(new Error('SERVER ERROR'))
                 }
             },
             error => {

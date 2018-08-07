@@ -1,0 +1,38 @@
+<div class="player">
+
+    <div class="album-image">
+        <span *ngIf="song.album">
+            <img id="play_image_album" src="{{urlAlbum +'/image/' + song.album.image}}" alt="album image">
+        </span>
+
+        <span *ngIf="!song.album">
+            <img id="play_image_album" src="../../assets/images/default.png" alt="icon music">
+        </span>
+    </div>
+
+
+    <div class="audio-file">
+        <div class="audio-file-description">
+            <p>Listening...</p>
+
+            <span id="play_song_title">
+                {{song.name}}
+            </span>
+            |
+            <span id="play_song_artist">
+                <span *ngIf="song.album.artist">
+                    {{song.album.artist.name}}
+                </span>
+            </span>
+
+            <span id="loop-selector" class="material-icons loop_icon" (click)="onLoop()">loop</span>
+        </div>
+
+        <audio controls id="player">
+            <source  id="mp3_source" src="{{getFilePath()}}" type="audio/mpeg"> THIS BROWSER DO NOT SUPPORT HTML5
+        </audio>
+
+    </div>
+
+
+</div>

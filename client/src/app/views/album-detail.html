@@ -1,0 +1,45 @@
+<div *ngIf="album" class="album-box">
+    <div id="album-head-card">
+        <div class="image">
+            <img src="{{urlImage + album.image}}" alt="{{album.title}}">
+        </div>
+
+        <div class="data">
+            <h1>{{album.title}}</h1>
+            <p>{{album.year}}</p>
+            <p>{{album.description}}</p>
+
+            <a *ngIf="identity.role == 'ROLE_ADMIN'" [routerLink]="['/song-add/', album._id]" class="btn btn-default">
+                Add Song
+            </a>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div *ngIf="songs" id="gallery-songs">
+        <ul id="songs_list">
+            <li *ngFor="let song of songs" class="song_item">
+                <div class="title">
+                    <a class="btn btn-success" (click)="onStartPlayer(song)">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    </a>
+                    {{song.number + '. ' + song.name + ' - ' + song.duration}}
+
+                    <div *ngIf="identity && identity.role == 'ROLE_ADMIN'" class="buttons">
+                        <a [routerLink]="['/song-edit/', song._id]" class="btn btn-warning">Edit</a>
+                        <a (click)="onConfirmDelete(song._id)" class="btn btn-sm btn-danger">Remove</a>
+
+                    </div>
+
+                    <div class="secure_delete secure_delete_song" *ngIf="identity && identity.role == 'ROLE_ADMIN' && confirm_delete == song._id">
+                        <a (click)="onDeleteSong(song._id)" class="btn btn-sm btn-warning">Delete</a>
+                        <a (click)="onCancel()" class="btn btn-sm btn-primary">Cancel</a>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -44,20 +44,18 @@ export class UserEditComponent implements OnInit {
                     this.makeFileRequest(url, [], this.filesToUpload).then(
                         (result: any) => {
                             this.user.image = result.image;
-                            localStorage.setItem('identity', JSON.stringify(this.user));
                             let image_path = this.url + this.user.image;
                             document.getElementById('image_logged').setAttribute('src', image_path);
-                            console.log(this.user);
                         },
-                        (error: any) => {
-                            console.log(Error('error when update image'));
+                        error => {
+                            console.log(new Error('error when update image'));
                         }
                     );
-                } else {
-                    console.log('filesToUpload no seteado');
                 }
 
+                localStorage.setItem('identity', JSON.stringify(this.user));
                 this.alertUpdate = 'The data was updated';
+
             },
             error => {
                 this.alertUpdate = JSON.parse((<any>error)._body).message;

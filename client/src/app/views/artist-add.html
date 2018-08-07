@@ -18,26 +18,26 @@
         </div>
         <p>
             <label>Name: </label>
-            <input type="text" #name="ngModel" name="name" [(ngModel)]="artist.name" class="form-control">
-            <span *ngIf="!name.valid && name.touched" style="color: red">
+            <input type="text" #name="ngModel" name="name" [(ngModel)]="artist.name" class="form-control" required>
+            <span *ngIf="!name.valid && name.touched">
                 name is mandatory
             </span>
         </p>
         <p>
             <label>Description: </label>
-            <textarea #description="ngModel" name="description" [(ngModel)]="artist.description" class="form-control"></textarea>
-            <span *ngIf="!name.valid && name.touched" style="color: red">
+            <textarea #description="ngModel" name="description" [(ngModel)]="artist.description" class="form-control" required></textarea>
+            <span *ngIf="!description.valid && description.touched">
                 description is mandatory
             </span>
         </p>
 
         <div *ngIf="isEdit">
             <div class="artist-image-for-edit" *ngIf="artist.image && artist.image != 'null'">
-                <img src="{{urlArtist + '/image/' + artist.image}}" alt="image profile">
+                <img src="{{ urlArtistImage + artist.image }}" alt="image profile">
             </div>
             <p>
                 <label>Image: </label>
-                <input type="file" placeholder="Upload image" (change)="fileChangeEvent($event)">
+                <input type="file" placeholder="Upload image" (change)="fileChangeEvent($event)" class="btn btn-primary">
             </p>
         </div>
 

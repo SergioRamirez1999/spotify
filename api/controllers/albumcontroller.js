@@ -13,7 +13,7 @@ function saveAlbum(req, res) {
     album.title = params.title;
     album.description = params.description;
     album.year = params.year;
-    album.artist = params.id;
+    album.artist = params.artist;
     album.image = 'null';
 
     if (album.title != null && album.description != null && album.year != null && album.artist != null) {
@@ -135,48 +135,48 @@ function getAlbumsArtist(req, res, artist_id) {
 
 }
 
-function uploadImage(req, res){
+function uploadImage(req, res) {
     let album_id = req.params.id;
     let file_name = "null";
 
-    if(req.files){
+    if (req.files) {
         let file_path = req.files.image.path;
         let file_split = file_path.split('/');
         let file_name = file_split[2]
 
         let ext_split = file_name.split('\.');
         let file_ext = ext_split[1];
-        
-        if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif') {
-            Album.findByIdAndUpdate(album_id, {image: file_name}, (err, albumUpdated) => {
 
-                if(err)
-                    res.status(500).send({message: 'error when update album image'});
-                else 
-                    if(!albumUpdated)
-                        res.status(404).send({message: 'error when update album image'})
-                    else 
-                        res.status(200).send({album_updated: albumUpdated})
-                    
+        if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif') {
+            Album.findByIdAndUpdate(album_id, { image: file_name }, (err, albumUpdated) => {
+
+                if (err)
+                    res.status(500).send({ message: 'error when update album image' });
+                else
+                    if (!albumUpdated)
+                        res.status(404).send({ message: 'error when update album image' })
+                    else
+                        res.status(200).send({ album_updated: albumUpdated })
+
             });
 
-        }else {
-            res.status(200).send({message: 'invalid extension'});
+        } else {
+            res.status(200).send({ message: 'invalid extension' });
         }
-            
-    }else{
-        res.status(200).send({message: 'you haven\'t upload any image'});
+
+    } else {
+        res.status(200).send({ message: 'you haven\'t upload any image' });
     }
 }
 
-function getImageFile(req,res){
+function getImageFile(req, res) {
     let name_image = req.params.imageFile;
-    let path_image = './upload/albums/'+name_image;
+    let path_image = './upload/albums/' + name_image;
     fs.exists(path_image, exists => {
-        if(exists)
+        if (exists)
             res.sendFile(path.resolve(path_image));
         else
-            res.status(404).send({message: 'image do not exists'});
+            res.status(404).send({ message: 'image do not exists' });
     });
 }
 

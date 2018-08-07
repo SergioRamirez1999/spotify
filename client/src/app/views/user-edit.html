@@ -28,10 +28,10 @@
             <img id="update_image"src="{{url+user.image}}" alt="" style="width: 100px">
         </div>
         <p>
-            <input type="file" placeholder="Upload new picture" (change)="fileChangeEvent($event)"class="btn btn-primary">
+            <input type="file" placeholder="Upload picture" (change)="fileChangeEvent($event)" class="btn btn-primary">
         </p>
 
-        <input type="submit" value="Update" class="btn btn-primary">
+        <input type="submit" value="Update" class="btn btn-primary" [disabled]="!updateForm.form.valid">
     </form>
 
 
